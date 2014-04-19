@@ -1,0 +1,10 @@
+[Sat Apr 19 11:35:39 2014] INFO: Opened log file Malwurl.log
+[Sat Apr 19 11:35:39 2014] INFO: Created 3 worker threads
+[Sat Apr 19 11:35:39 2014] INFO: Added resource path /Users/averez/Hack/netantho/viz3D/Bin/CoreData/
+[Sat Apr 19 11:35:39 2014] INFO: Added resource path /Users/averez/Hack/netantho/viz3D/Bin/Data/
+[Sat Apr 19 11:35:39 2014] WARNING: Skipped autoload folder Extra as it does not exist
+[Sat Apr 19 11:35:39 2014] INFO: Set screen mode 1024x768 windowed
+[Sat Apr 19 11:35:39 2014] INFO: Initialized input
+[Sat Apr 19 11:35:39 2014] INFO: Initialized user interface
+[Sat Apr 19 11:35:39 2014] INFO: Initialized renderer
+[Sat Apr 19 11:35:39 2014] INFO: Set audio mode 44100 Hz stereo interpolated
