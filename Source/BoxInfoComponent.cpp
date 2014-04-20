@@ -32,27 +32,8 @@
 BoxInfoComponent::BoxInfoComponent(Context* context) :
     LogicComponent(context)
 {
+
 }
-
-// void BoxInfoComponent::SetClusterId(std::string clusterId)
-// {
-//     clusterId_ = clusterId;
-// }
-
-// const std::string BoxInfoComponent::GetClusterId()
-// {
-//     return(clusterId_);
-// }
-
-// void BoxInfoComponent::SetUrl(std::string url)
-// {
-//     url_ = url;
-// }
-
-// const std::string BoxInfoComponent::GetUrl()
-// {
-//     return(url_);
-// }
 
 void BoxInfoComponent::OnNodeSet(Node* node)
 {

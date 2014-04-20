@@ -83,7 +83,7 @@ void Viz3D::StartVisu()
     // Create the UI content
     CreateInstructions();
 
-    // Create clusterId and URL info text placeholders
+    // Create clusterId and label info text placeholders
     CreatePointInfo();
 
     // Setup the viewport for displaying the scene
@@ -167,16 +167,22 @@ void Viz3D::CreateScene()
     // Load data
     File myfile(context_, String("Data/Datasets/")+map_);
     double x, y, z;
+    bool clusterEnabled = false;
     int clusterId;
-    // String url;
-    myfile.ReadLine(); // ignore the first line
-
+    bool labelEnabled = false;
+    String label;
     String line = myfile.ReadLine();
+    int fieldsNumberTsv = line.Split('\t').Size();
+
+
+
+    line = myfile.ReadLine();
     Vector<String> lineargs;
     StaticModelGroup* currentModelGroup;
     Vector<StaticModelGroup*> staticModelGroups;
 
     LOGINFO(String("Loading ")+map_+String("..."));
+
     // Initializing static model groups with colors
     for(int i=0; i<30; i++)
     {
@@ -287,14 +293,14 @@ void Viz3D::CreateScene()
         y = atof(lineargs[1].CString());
         z = atof(lineargs[2].CString());
         clusterId = atoi(lineargs[3].CString());
-        // url = lineargs[4];
+        label = lineargs[4];
 
         Node* boxNode = scene_->CreateChild("Box");
         boxNode->SetPosition(Vector3(x * 400.0f, z * 400.0f, y * 400.0f));
         boxNode->SetScale(0.25f);
         BoxInfoComponent* myboxinfo = boxNode->CreateComponent<BoxInfoComponent>();
         myboxinfo->clusterId_ = clusterId;
-        // myboxinfo->url_ = url;
+        myboxinfo->label_ = label;
         boxNodes_.Push(SharedPtr<Node>(boxNode));
         staticModelGroups[clusterId]->AddInstanceNode(boxNode);
 
@@ -359,15 +365,15 @@ void Viz3D::CreatePointInfo()
     clusterIdText_->SetPosition(100, ui->GetRoot()->GetHeight() / 8);
 
     // Construct new Text object, set string to display and font to use
-    // urlText_ = ui->GetRoot()->CreateChild<Text>();
-    // urlText_->SetText("");
-    // urlText_->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 15);
-    // urlText_->SetColor(Color(0.0f, 0.0f, 0.0f));
+    labelText_ = ui->GetRoot()->CreateChild<Text>();
+    labelText_->SetText("");
+    labelText_->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 15);
+    labelText_->SetColor(Color(0.0f, 0.0f, 0.0f));
 
     // Position the text on top left
-    // urlText_->SetHorizontalAlignment(HA_LEFT);
-    // urlText_->SetVerticalAlignment(VA_TOP);
-    // urlText_->SetPosition(100, ui->GetRoot()->GetHeight() / 8 + 30);
+    labelText_->SetHorizontalAlignment(HA_LEFT);
+    labelText_->SetVerticalAlignment(VA_TOP);
+    labelText_->SetPosition(100, ui->GetRoot()->GetHeight() / 8 + 30);
 
 }
 
@@ -529,12 +535,12 @@ void Viz3D::HandlePostRenderUpdate(StringHash eventType, VariantMap& eventData)
     {
         BoxInfoComponent* boxInfoComponent = targetedNode_->GetComponent<BoxInfoComponent>();
         clusterIdText_->SetText(String(boxInfoComponent->clusterId_));
-        // urlText_->SetText(boxInfoComponent->url_);
+        labelText_->SetText(boxInfoComponent->label_);
     }
     else
     {
         clusterIdText_->SetText("");
-        // urlText_->SetText("");
+        labelText_->SetText("");
     }
 }
 

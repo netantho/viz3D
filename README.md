@@ -28,8 +28,14 @@ cd Bin
 
 ## TODO
 
+* url -> label
+* Dataset items can have a label and/or a cluster or not
+* Change executable name to viz3D
+* More samples, some with labels, some without
 * Document usage
-* Have it working
 * Android version
 * Travis integration
 	* Need to modify CMakeLists.txt among other things
+* Code cleanup/refactoring
+* Key to inverse colors
+* Add a demo video

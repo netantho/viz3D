@@ -32,7 +32,7 @@ private:
     void CreateScene();
     /// Construct an instruction text to the UI.
     void CreateInstructions();
-    /// Construct and update cluserId and URL info text for a point
+    /// Construct and update cluserId and label info text for a point
     void CreatePointInfo();
     /// Create and initialize a Window control.
     void InitWindow();
@@ -73,8 +73,8 @@ private:
     Node* targetedNode_;
     /// End position defined flag.
     bool targetedDefined_;
-    /// URL UI Text
-    Text* urlText_;
+    /// Label UI Text
+    Text* labelText_;
     /// ClusterId UI Text
     Text* clusterIdText_;
     /// Map

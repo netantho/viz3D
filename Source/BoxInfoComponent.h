@@ -33,7 +33,7 @@ using namespace Urho3D;
 class BoxInfoComponent : public LogicComponent
 {
     OBJECT(BoxInfoComponent);
-    
+
 public:
     /// Construct.
     BoxInfoComponent(Context* context);
@@ -41,15 +41,13 @@ public:
     /// Cluster number
     int clusterId_;
     /// URL
-    String url_;
+    String label_;
 
 protected:
     /// Handle node being assigned.
     virtual void OnNodeSet(Node* node);
-    
+
 private:
     /// Handle scene update event.
     void HandleSceneUpdate(StringHash eventType, VariantMap& eventData);
-    
-
 };
