@@ -102,6 +102,7 @@ void Viz3D::InitControls()
 
     // Create a Button
     for(int i=0; i < strvector.Size(); i++) {
+        LOGINFO(strvector[i]);
         Button* button = new Button(context_);
         button->SetName(strvector[i]);
         button->SetMinHeight(24);

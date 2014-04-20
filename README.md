@@ -26,14 +26,20 @@ cd Bin
 ./Viz3D
 ```
 
+## Benchmark
+
+On my macbook pro 2013:
+* 100k_cluster_label: 60-70 fps (for 100k points!)
+
 ## TODO
 
-* Bug: sometimes the datesets list is empty
-* More samples, some with labels, some without
+* Bug: sometimes the datasets list is empty
 * Document usage
-* Android version
 * Travis integration
 	* Need to modify CMakeLists.txt among other things
 * Code cleanup/refactoring
 * Key to inverse colors
+* Screenshots
+
 * Add a demo video
+* Android version
