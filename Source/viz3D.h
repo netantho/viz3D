@@ -79,4 +79,8 @@ private:
     Text* clusterIdText_;
     /// Map
     String map_;
+    /// Cluster field enabled?
+    bool clusterEnabled_;
+    /// Label field enabled?
+    bool labelEnabled_;
 };

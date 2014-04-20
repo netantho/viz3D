@@ -167,14 +167,24 @@ void Viz3D::CreateScene()
     // Load data
     File myfile(context_, String("Data/Datasets/")+map_);
     double x, y, z;
-    bool clusterEnabled = false;
     int clusterId;
-    bool labelEnabled = false;
     String label;
     String line = myfile.ReadLine();
     int fieldsNumberTsv = line.Split('\t').Size();
 
+    clusterEnabled_ = false;
+    labelEnabled_ = false;
 
+    for(int i=0; i < fieldsNumberTsv; i++) {
+        if (line.Split('\t')[i] == String("cluster")) {
+            clusterEnabled_ = true;
+        }
+        if (line.Split('\t')[i] == String("label")) {
+            labelEnabled_ = true;
+        }
+    }
+    LOGINFO(String("cluster field: ")+String(clusterEnabled_));
+    LOGINFO(String("label field: ")+String(labelEnabled_));
 
     line = myfile.ReadLine();
     Vector<String> lineargs;
@@ -292,17 +302,28 @@ void Viz3D::CreateScene()
         x = atof(lineargs[0].CString());
         y = atof(lineargs[1].CString());
         z = atof(lineargs[2].CString());
-        clusterId = atoi(lineargs[3].CString());
-        label = lineargs[4];
+        if (clusterEnabled_ && !labelEnabled_)
+            clusterId = atoi(lineargs[3].CString());
+        if (labelEnabled_ && !clusterEnabled_)
+            label = lineargs[3];
+        if (clusterEnabled_ && labelEnabled_) {
+            clusterId = atoi(lineargs[3].CString());
+            label = lineargs[4];
+        }
 
         Node* boxNode = scene_->CreateChild("Box");
         boxNode->SetPosition(Vector3(x * 400.0f, z * 400.0f, y * 400.0f));
         boxNode->SetScale(0.25f);
         BoxInfoComponent* myboxinfo = boxNode->CreateComponent<BoxInfoComponent>();
-        myboxinfo->clusterId_ = clusterId;
-        myboxinfo->label_ = label;
+        if (clusterEnabled_)
+            myboxinfo->clusterId_ = clusterId;
+        if (labelEnabled_)
+            myboxinfo->label_ = label;
         boxNodes_.Push(SharedPtr<Node>(boxNode));
-        staticModelGroups[clusterId]->AddInstanceNode(boxNode);
+        if (clusterEnabled_)
+            staticModelGroups[clusterId]->AddInstanceNode(boxNode);
+        else
+            staticModelGroups[0]->AddInstanceNode(boxNode);
 
         line = myfile.ReadLine();
     }
@@ -534,8 +555,10 @@ void Viz3D::HandlePostRenderUpdate(StringHash eventType, VariantMap& eventData)
     if (targetedDefined_)
     {
         BoxInfoComponent* boxInfoComponent = targetedNode_->GetComponent<BoxInfoComponent>();
-        clusterIdText_->SetText(String(boxInfoComponent->clusterId_));
-        labelText_->SetText(boxInfoComponent->label_);
+        if (clusterEnabled_)
+            clusterIdText_->SetText(String("Cluster ")+String(boxInfoComponent->clusterId_));
+        if (labelEnabled_)
+            labelText_->SetText(boxInfoComponent->label_);
     }
     else
     {

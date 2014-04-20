@@ -28,9 +28,8 @@ cd Bin
 
 ## TODO
 
-* url -> label
-* Dataset items can have a label and/or a cluster or not
 * Change executable name to viz3D
+* Bug: sometimes the datesets list is empty
 * More samples, some with labels, some without
 * Document usage
 * Android version
