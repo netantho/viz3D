@@ -23,12 +23,11 @@ Install viz3D:
 ```
 sh ./install.sh
 cd Bin
-./Main
+./Viz3D
 ```
 
 ## TODO
 
-* Change executable name to viz3D
 * Bug: sometimes the datesets list is empty
 * More samples, some with labels, some without
 * Document usage

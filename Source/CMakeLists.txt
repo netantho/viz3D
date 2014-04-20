@@ -21,7 +21,7 @@ include_directories (${URHO3D_INCLUDE_DIRS})
 include_directories ($ENV{URHO3D_HOME}/Source/Samples)
 
 # Define target name
-set (TARGET_NAME Main)
+set (TARGET_NAME Viz3D)
 
 # Define source files
 define_source_files ()
