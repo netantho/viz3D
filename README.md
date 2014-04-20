@@ -48,12 +48,11 @@ On my macbook pro 2013:
 
 ## TODO
 
+* Screenshots
+
 * Bug: sometimes the datasets list is empty
 * Travis integration
 	* Need to modify CMakeLists.txt among other things
-* Code cleanup/refactoring
 * Key to inverse colors
-* Screenshots
-
 * Add a demo video
 * Android version
