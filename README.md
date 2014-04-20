@@ -26,6 +26,21 @@ cd Bin
 ./Viz3D
 ```
 
+## Usage
+
+Dataset format:
+
+```
+x\ty\tz\tcluster\tlabel
+0.000000	0.000000	0.000000	0	My awesome label here!
+```
+The `cluster` and `label` columns are optional.
+See `Samples/Datasets` for more examples
+
+When your dataset is ready, copy it with a `.tsv` extension in `Bin/Data/Datasets`.
+
+Enjoy!
+
 ## Benchmark
 
 On my macbook pro 2013:
@@ -34,7 +49,6 @@ On my macbook pro 2013:
 ## TODO
 
 * Bug: sometimes the datasets list is empty
-* Document usage
 * Travis integration
 	* Need to modify CMakeLists.txt among other things
 * Code cleanup/refactoring
