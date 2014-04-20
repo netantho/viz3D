@@ -98,7 +98,7 @@ void Viz3D::InitControls()
     Vector<String> strvector;
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     FileSystem* filesystem;
-    filesystem->ScanDir(strvector, String("../../visualization/3d/"), "", 1, true);
+    filesystem->ScanDir(strvector, String("Data/Datasets/"), "", 1, true);
 
     // Create a Button
     for(int i=0; i < strvector.Size(); i++) {
@@ -165,10 +165,10 @@ void Viz3D::CreateScene()
     // light->SetColor(Color(1.0f, 0.898f, 0.702f));
 
     // Load data
-    File myfile(context_, String("../../visualization/3d/")+map_);
+    File myfile(context_, String("Data/Datasets/")+map_);
     double x, y, z;
     int clusterId;
-    String url;
+    // String url;
     myfile.ReadLine(); // ignore the first line
 
     String line = myfile.ReadLine();
@@ -184,33 +184,6 @@ void Viz3D::CreateScene()
         currentModelGroup = boxGroupNode->CreateComponent<StaticModelGroup>();
         currentModelGroup->SetModel(cache->GetResource<Model>("Models/Box.mdl"));
         switch (i) {
-            case 9:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Ivory.xml"));
-                break;
-            case 10:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Beige.xml"));
-                break;
-            case 11:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Wheat.xml"));
-                break;
-            case 12:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Tan.xml"));
-                break;
-            case 13:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Khaki.xml"));
-                break;
-            case 5:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Silver.xml"));
-                break;
-            case 6:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/NavyBlue.xml"));
-                break;
-            case 7:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/RoyalBlue.xml"));
-                break;
-            case 8:
-                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/MediumBlue.xml"));
-                break;
             case 0:
                 currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Azure.xml"));
                 break;
@@ -225,6 +198,33 @@ void Viz3D::CreateScene()
                 break;
             case 4:
                 currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/ForestGreen.xml"));
+                break;
+                case 5:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Silver.xml"));
+                break;
+            case 6:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/NavyBlue.xml"));
+                break;
+            case 7:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/RoyalBlue.xml"));
+                break;
+            case 8:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/MediumBlue.xml"));
+                break;
+            case 9:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Ivory.xml"));
+                break;
+            case 10:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Beige.xml"));
+                break;
+            case 11:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Wheat.xml"));
+                break;
+            case 12:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Tan.xml"));
+                break;
+            case 13:
+                currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Khaki.xml"));
                 break;
             case 14:
                 currentModelGroup->SetMaterial(cache->GetResource<Material>("Materials/Olive.xml"));
@@ -287,14 +287,14 @@ void Viz3D::CreateScene()
         y = atof(lineargs[1].CString());
         z = atof(lineargs[2].CString());
         clusterId = atoi(lineargs[3].CString());
-        url = lineargs[4];
+        // url = lineargs[4];
 
         Node* boxNode = scene_->CreateChild("Box");
         boxNode->SetPosition(Vector3(x * 400.0f, z * 400.0f, y * 400.0f));
         boxNode->SetScale(0.25f);
         BoxInfoComponent* myboxinfo = boxNode->CreateComponent<BoxInfoComponent>();
         myboxinfo->clusterId_ = clusterId;
-        myboxinfo->url_ = url;
+        // myboxinfo->url_ = url;
         boxNodes_.Push(SharedPtr<Node>(boxNode));
         staticModelGroups[clusterId]->AddInstanceNode(boxNode);
 
@@ -359,15 +359,15 @@ void Viz3D::CreatePointInfo()
     clusterIdText_->SetPosition(100, ui->GetRoot()->GetHeight() / 8);
 
     // Construct new Text object, set string to display and font to use
-    urlText_ = ui->GetRoot()->CreateChild<Text>();
-    urlText_->SetText("");
-    urlText_->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 15);
-    urlText_->SetColor(Color(0.0f, 0.0f, 0.0f));
+    // urlText_ = ui->GetRoot()->CreateChild<Text>();
+    // urlText_->SetText("");
+    // urlText_->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 15);
+    // urlText_->SetColor(Color(0.0f, 0.0f, 0.0f));
 
     // Position the text on top left
-    urlText_->SetHorizontalAlignment(HA_LEFT);
-    urlText_->SetVerticalAlignment(VA_TOP);
-    urlText_->SetPosition(100, ui->GetRoot()->GetHeight() / 8 + 30);
+    // urlText_->SetHorizontalAlignment(HA_LEFT);
+    // urlText_->SetVerticalAlignment(VA_TOP);
+    // urlText_->SetPosition(100, ui->GetRoot()->GetHeight() / 8 + 30);
 
 }
 
@@ -399,8 +399,10 @@ void Viz3D::SubscribeToEventsVisu()
 void Viz3D::MoveCamera(float timeStep)
 {
     // Do not move if the UI has a focused element (the console)
-    if (GetSubsystem<UI>()->GetFocusElement())
-        return;
+    // if (GetSubsystem<UI>()->GetFocusElement()) {
+    //     LOGINFO(String("Err, focused element"));
+    //     return;
+    // }
 
     Input* input = GetSubsystem<Input>();
 
@@ -527,12 +529,12 @@ void Viz3D::HandlePostRenderUpdate(StringHash eventType, VariantMap& eventData)
     {
         BoxInfoComponent* boxInfoComponent = targetedNode_->GetComponent<BoxInfoComponent>();
         clusterIdText_->SetText(String(boxInfoComponent->clusterId_));
-        urlText_->SetText(boxInfoComponent->url_);
+        // urlText_->SetText(boxInfoComponent->url_);
     }
     else
     {
         clusterIdText_->SetText("");
-        urlText_->SetText("");
+        // urlText_->SetText("");
     }
 }
 

@@ -28,6 +28,8 @@ cd Bin
 
 ## TODO
 
-* Improve CMakeLists.txt based on https://github.com/urho3d/Urho3D/blob/master/Source/CMake/Modules/Urho3D-CMake-common.cmake
+* Document usage
+* Have it working
+* Android version
 * Travis integration
 	* Need to modify CMakeLists.txt among other things

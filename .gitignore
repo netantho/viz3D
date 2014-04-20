@@ -1,6 +1,7 @@
 *.o
-Bin/Viz3D.log
+*.log
 Bin/CoreData
 Bin/Data
 Build/*
 Bin/*
+Samples_orig
