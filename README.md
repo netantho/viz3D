@@ -4,6 +4,8 @@ Visualize your points in 3D at scale!
 
 Created by [Anthony Verez](http://www.anthony-verez.fr) ([@netantho](http://twitter.com/netantho)) and Emmanuel Chaboud (amadeus)
 
+![Viz3D screenshot](https://raw.githubusercontent.com/netantho/viz3D/master/screenshot.png)
+
 ## Installation
 
 Clone this repo:
@@ -47,8 +49,6 @@ On my macbook pro 2013:
 * 100k_cluster_label: 60-70 fps (for 100k points!)
 
 ## TODO
-
-* Screenshots
 
 * Bug: sometimes the datasets list is empty
 * Travis integration
